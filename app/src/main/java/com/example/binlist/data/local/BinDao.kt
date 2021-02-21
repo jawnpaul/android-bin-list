@@ -15,6 +15,9 @@ interface BinDao {
     @Query("SELECT * FROM bins_table WHERE localId = :id")
     fun getBin(id: Int): LiveData<BinModel>
 
+    @Query("DELETE FROM bins_table")
+    suspend fun deleteAll()
+
     /*@Query("SELECT * FROM bins_table")
     fun getBin(id: Int): LiveData<BinModel>*/
 

@@ -9,10 +9,13 @@ class BinRepository @Inject constructor(
     private val remoteDataSource: BinRemoteDataSource,
     private val localDataSource: BinDao
 ) {
+
     fun getBin(cardNumber: Int) = performGetOperation(
-        databaseQuery = { localDataSource.getAllBins() },
-        networkCall = { remoteDataSource.getBin(cardNumber) },
-        saveCallResult = { localDataSource.insert(BinModel(it)) }
+            databaseQuery = { localDataSource.getAllBins() },
+            networkCall = { remoteDataSource.getBin(cardNumber) },
+            saveCallResult = { localDataSource.insert(BinModel(it)) }
 
     )
+
+    suspend fun delete() = localDataSource.deleteAll()
 }
